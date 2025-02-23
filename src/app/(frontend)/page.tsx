@@ -19,15 +19,15 @@ export default async function HomePage() {
   })
 
   return (
-    <div className="container mx-auto p-4">
+    <div>
       <header>
         <h1 className="mb-4 text-3xl font-bold">Hello, {user ? user.email : 'none'}!</h1>
       </header>
       <section>
         <h2 className="mb-4 text-2xl font-bold">Todos</h2>
-        <section className="mb-2 grid gap-4 md:grid-cols-2">
+        <section className="mb-2 grid gap-4 md:grid-cols-3">
           {todos.docs.map((todo) => (
-            <Link href={`/todos/${todo.id}`} key={todo.id}>
+            <Link href={`/${todo.id}`} key={todo.id}>
               <Card>
                 <CardHeader>
                   <div className="flex justify-between">

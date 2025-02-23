@@ -1,5 +1,6 @@
 import React from 'react'
 import './globals.css'
+import Link from 'next/link'
 
 export const metadata = {
   description: 'A blank template using Payload in a Next.js app.',
@@ -12,7 +13,10 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <main>{children}</main>
+        <header className="container mx-auto p-4">
+          <Link href="/"> Home </Link>
+        </header>
+        <main className="container mx-auto p-4">{children}</main>
       </body>
     </html>
   )
