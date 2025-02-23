@@ -1,11 +1,11 @@
 import { headers as getHeaders } from 'next/headers.js'
 
 import { getPayload } from 'payload'
-import React from 'react'
-import { fileURLToPath } from 'url'
 
 import config from '@/payload.config'
 import './globals.css'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import Link from 'next/link'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -21,20 +21,27 @@ export default async function HomePage() {
   return (
     <div className="container mx-auto p-4">
       <header>
-        <h1 className="text-3xl font-bold mb-4">Hello, {user ? user.email : 'none'}!</h1>
+        <h1 className="mb-4 text-3xl font-bold">Hello, {user ? user.email : 'none'}!</h1>
       </header>
       <section>
-        <h2 className="text-2xl font-bold mb-4">Todos</h2>
-        <ul>
+        <h2 className="mb-4 text-2xl font-bold">Todos</h2>
+        <section className="mb-2 grid gap-4 md:grid-cols-2">
           {todos.docs.map((todo) => (
-            <li key={todo.id} className="mb-2">
-              <div>
-                <h3 className='font-bold' >{todo.title}</h3>
-                <p>{todo.description}</p>
-              </div>
-            </li>
+            <Link href={`/todos/${todo.id}`} key={todo.id}>
+              <Card>
+                <CardHeader>
+                  <div className="flex justify-between">
+                    <CardTitle className="font-bold">{todo.title}</CardTitle>
+                    <CardDescription>{todo.completed ? 'Yes' : 'No'}</CardDescription>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>{todo.description}</CardDescription>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
-        </ul>
+        </section>
       </section>
     </div>
   )
